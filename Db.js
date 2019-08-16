@@ -2,6 +2,7 @@ var csv = require('csvtojson');
 var pg = require('pg');
 var { Pool } = require('pg');
 
+// setting pool from class Pool in postgress
 var pool = new Pool({
     "user": "postgres",
     "password": "lovel",
@@ -10,6 +11,7 @@ var pool = new Pool({
     "database": "FNHF"
 });
 
+//pool connection
 pool.connect(function(err) {
     if (err) {
         console.log(err);
@@ -17,7 +19,7 @@ pool.connect(function(err) {
 });
 
 
-
+// handling error if occur
 pool.on('error', function(err, pool) {
     console.error("connection fail", err.message, err.stack);
 
