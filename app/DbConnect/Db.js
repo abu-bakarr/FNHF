@@ -11,12 +11,7 @@ var pool = new Pool({
     "database": "FNHF"
 });
 
-//pool connection
-pool.connect(function(err) {
-    if (err) {
-        console.log(err);
-    }
-});
+
 
 
 // handling error if occur
