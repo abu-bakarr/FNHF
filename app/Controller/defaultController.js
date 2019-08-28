@@ -8,7 +8,8 @@ module.exports = {
             pageID: "HOME",
             viewTitle: "Postgres Data",
             pageTitle: "Postgress and Node app",
-            data: req.body
+            data: req.body,
+
         });
     },
     listview: (req, res) => {
@@ -20,25 +21,43 @@ module.exports = {
     addData: (req, res) => {
         info = req.body;
         console.log(info);
-        console.log(req);
+        // console.log(req);
+        itExist = true
 
+        execute();
         pool.connect()
 
-           .then(() => pool.query("SELECT EXISTS(SELECT 1 FROM find_nearest_hf WHERE cellid == $1`, [info.cellId]"))
-           .then(result => console.table(result.rows))
-          //.then(() => pool.query(`SELECT EXISTS(SELECT 1 FROM find_nearest_hf WHERE cellid == $1`, [info.cellId]))
-           .then(() => pool.query(`INSERT INTO session_tbl (sitename, cellid, cellname, nearesthf) \
-                 VALUES ($1, $2, $3, $4)`, [info.siteName, info.cellId, info.cellname, info.nearestfacility]))
-            .catch(e => console.log(e));
+      var sqlCheck
+      async function execute(){
+        try {
+          await pool.connect()
+              var nearhf = await pool.query(`SELECT DISTINCT nearestfacility FROM find_nearest_hf WHERE cellid like $1`, [info.cellid])
+              var another = await pool.query(`SELECT EXISTS(SELECT 1 FROM find_nearest_hf WHERE cellid like $1)`, [info.cellid])
 
-        res.render('listview', {
+              if (another.rows[0]['exists'] == true) {
+                   console.log("avaiblabe");
+
+                   await pool.query(`INSERT INTO sms_tbl (phone_number, nearestfacility, status, cellid) \
+                   VALUES ($1, $2, $3, $4)`, [info.phone_number, nearhf.rows[0].nearestfacility, info.status, info.cellid])
+              }else{
+                  console.log(`does not exists in database`);
+
+                  }
+          }catch(e){
+            console.log(e);
+          }
+
+
+            }
+
+        res.render('index', {
             pageID: "HOME",
             viewTitle: "Postgres Data",
             pageTitle: "Postgress and Node app",
-            data: info
+            data: sqlCheck
         });
 
-        console.log(info);
+
     }
 
 }

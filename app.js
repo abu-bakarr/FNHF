@@ -13,7 +13,7 @@ console.log(timeStamp.utc('YYYYMMDD'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //setting an environment variable
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3030);
 
 // setting a counter to import csv file
 //var counter = 0;
