@@ -27,6 +27,7 @@ app.set('port', process.env.PORT || 3030);
 //     }
 // });
 
+// conecting the database
 pool.connect()
     .then(() => console.log("Connected successfully"))
     // .then(() => pool.query("SELECT * FROM find_nearest_hf"))
