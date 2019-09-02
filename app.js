@@ -10,17 +10,29 @@ var timeStamp = require('time-stamp');
 console.log(timeStamp.utc('YYYYMMDD'));
 
 // including body parser
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //setting an environment variable
 app.set('port', process.env.PORT || 3030);
 
+// setting a counter to import csv file
+//var counter = 0;
+
+// pool function to connect to database
+// pool.connect(function(err) {
+//     if (!err) {
+//         console.log("connected.......");
+//     } else {
+//         console.log(err);
+//     }
+// });
+
 // conecting the database
 pool.connect()
     .then(() => console.log("Connected successfully"))
-    .catch(err => console.log(err));
+    // .then(() => pool.query("SELECT * FROM find_nearest_hf"))
+    // .then(result => console.table(result.rows))
+    .catch(err => console.log(err))
 
 
 
