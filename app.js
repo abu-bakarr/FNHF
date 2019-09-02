@@ -4,10 +4,6 @@ var fs = require('fs');
 var csv = require('fast-csv');
 var pool = require('./app/DbConnect/Db');
 var bodyParser = require('body-parser');
-var timeStamp = require('time-stamp');
-
-
-console.log(timeStamp.utc('YYYYMMDD'));
 
 // including body parser
 app.use(bodyParser.urlencoded({
