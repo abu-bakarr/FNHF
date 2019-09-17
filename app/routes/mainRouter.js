@@ -5,8 +5,12 @@ var defaultController = require('../Controller/defaultController');
 
 //route to get and POST
 router.route('/')
-    .get(defaultController.index)
-    .post(defaultController.addData);
+    .get(defaultController.Home)
+    .post(defaultController.addData)
+
+router.route('/:id')
+    .get(defaultController.getSingle)
+
 
 router.route('/list')
     .get(defaultController.listview);
