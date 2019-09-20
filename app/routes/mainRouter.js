@@ -1,19 +1,15 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-var defaultController = require('../Controller/defaultController');
+var defaultController = require("../Controller/defaultController");
 
 //route to get and POST
-router.route('/')
-    .get(defaultController.Home)
-    .post(defaultController.addData)
+router.route("/school/:id")
+    .get(defaultController.allSchoolSms)
+    .post(defaultController.addData);
 
-router.route('/:id')
-    .get(defaultController.getSingle)
-
-
-router.route('/list')
-    .get(defaultController.listview);
-
+router.route("/report")
+    .get(defaultController.allReport)
+    .post(defaultController.postReport)
 
 module.exports = router;
